@@ -3,6 +3,7 @@ require('dotenv').config();
 
 class Database {
     async connect() {
+        console.log(process.env.db_host); // Should print your database host
         const connection = await mysql.createConnection({
             host: process.env.db_host,
             user: process.env.db_user,
@@ -16,10 +17,10 @@ class Database {
 
     async getQuery(sql, params) {
         const connection = await this.connect();
-        const [rows] = await connection.execute(sql, params);
+        const [ rows ] = await connection.execute(sql, params);
 
         return rows;
     }
 }
 
-module.exports = Database; // Export the class
+module.exports = Database;
